@@ -12,36 +12,74 @@ public class AcertaNumero {
     public void inicializador() {
         final int LIMITE = 6;
         int numeroAleatorio;
-        int tentativaJogador1;
-        int tentativaJogador2;
         Scanner leia = new Scanner(System.in);
 
         do {
-            numeroAleatorio = geradorNumeroAleatorio(LIMITE);
+            boolean alguemVenceu;
+            int tentativaJogador1;
+            int tentativaJogador2;
+            int pontosJogador1 = 0;
+            int pontosJogador2 = 0;
 
-            System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬_JOGO_DO_ACERTO_¬¬¬¬¬¬¬¬¬¬¬¬");
-            System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
-            System.out.print("Jogador 1 - Digite um número de 1 á " + LIMITE + ": ");
-            tentativaJogador1 = leia.nextInt();
-            System.out.print("Jogador 2 - Digite um número de 1 á " + LIMITE + ": ");
-            tentativaJogador2 = leia.nextInt();
+            do {
+                System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬_JOGO_DO_ACERTO_¬¬¬¬¬¬¬¬¬¬¬¬");
+                System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+                System.out.print("Jogador 1 - Digite um número de 1 á " + LIMITE + ": ");
+                tentativaJogador1 = leia.nextInt();
+                System.out.print("Jogador 2 - Digite um número de 1 á " + LIMITE + ": ");
+                tentativaJogador2 = leia.nextInt();
 
-            System.out.println();
-            this.verificarVitoria("Jogador 1 -> ", tentativaJogador1, numeroAleatorio);
-            this.verificarVitoria("Jogador 2 -> ", tentativaJogador2, numeroAleatorio);
+                numeroAleatorio = geradorNumeroAleatorio(LIMITE);
+                System.out.println();
 
-            System.out.println();
+                if (this.verificarVitoriaRodada("Jogador 1 -> ", tentativaJogador1, numeroAleatorio)) {
+                    pontosJogador1++;
+                }
+
+                if (this.verificarVitoriaRodada("Jogador 2 -> ", tentativaJogador2, numeroAleatorio)) {
+                    pontosJogador2++;
+                }
+
+                alguemVenceu = verificarVitoria(pontosJogador1, pontosJogador2);
+
+                System.out.println();
+            } while (!alguemVenceu);
         } while (this.executarNovamente());
 
         System.out.println("Saindo...");
     }
 
-    public void verificarVitoria(String jogador, int tentativaJogador, int numeroAleatorio) {
+    public boolean verificarVitoria(int pontosJogador1, int pontosJogador2) {
+        boolean alguemVenceu = false;
+
+        if (pontosJogador1 == 3 && pontosJogador2 == 3) {
+            System.out.println("\n¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            System.out.println("Empate");
+            System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            alguemVenceu = true;
+        } else if (pontosJogador1 == 3) {
+            System.out.println("\n¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            System.out.println("Jogador 1 -> Você gahou");
+            System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            alguemVenceu = true;
+        } else if (pontosJogador2 == 3) {
+            System.out.println("\n¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            System.out.println("Jogador 2 -> Você gahou");
+            System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
+            alguemVenceu = true;
+        }
+
+        return alguemVenceu;
+    }
+
+    public boolean verificarVitoriaRodada(String jogador, int tentativaJogador, int numeroAleatorio) {
         if (tentativaJogador == numeroAleatorio) {
             System.out.println(jogador + " Você acertou. Parabéns!");
-        } else {
-            System.out.println(VERMELHO + jogador + " Você errou!" + RESETAR);
+            return true;
         }
+
+        System.out.println(VERMELHO + jogador + " Você errou!" + RESETAR);
+        return false;
     }
 
     public boolean executarNovamente() {
