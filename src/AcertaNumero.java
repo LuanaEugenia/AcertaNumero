@@ -10,12 +10,13 @@ public class AcertaNumero {
     }
 
     public void inicializador() {
-        Scanner leia = new Scanner(System.in);
-        int tentativaJogador;
+        final int LIMITE = 6;
         int numeroAleatorio;
+        int tentativaJogador;
+        Scanner leia = new Scanner(System.in);
 
         do {
-            numeroAleatorio = geradorNumeroAleatorio(3);
+            numeroAleatorio = geradorNumeroAleatorio(LIMITE);
 
             System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬_JOGO_DO_ACERTO_¬¬¬¬¬¬¬¬¬¬¬¬");
             System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
