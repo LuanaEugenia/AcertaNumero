@@ -19,12 +19,11 @@ public class AcertaNumero {
         do {
             numeroAleatorio = geradorNumeroAleatorio(LIMITE);
 
-            System.out.println(numeroAleatorio);
             System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬_JOGO_DO_ACERTO_¬¬¬¬¬¬¬¬¬¬¬¬");
             System.out.println("¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬");
-            System.out.print("Jogador 1 - Digite um número de 1 á 3: ");
+            System.out.print("Jogador 1 - Digite um número de 1 á " + LIMITE + ": ");
             tentativaJogador1 = leia.nextInt();
-            System.out.print("Jogador 2 - Digite um número de 1 á 3: ");
+            System.out.print("Jogador 2 - Digite um número de 1 á " + LIMITE + ": ");
             tentativaJogador2 = leia.nextInt();
 
             System.out.println();
@@ -37,11 +36,11 @@ public class AcertaNumero {
         System.out.println("Saindo...");
     }
 
-    public void verificarVitoria(String jogador, int tentativaJogador1, int numeroAleatorio) {
-        if (tentativaJogador1 == numeroAleatorio) {
-            System.out.println("Você acertou. Parabéns!");
+    public void verificarVitoria(String jogador, int tentativaJogador, int numeroAleatorio) {
+        if (tentativaJogador == numeroAleatorio) {
+            System.out.println(jogador + " Você acertou. Parabéns!");
         } else {
-            System.out.println(VERMELHO + "Você errou!" + RESETAR);
+            System.out.println(VERMELHO + jogador + " Você errou!" + RESETAR);
         }
     }
 
